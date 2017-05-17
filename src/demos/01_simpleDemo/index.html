@@ -65,13 +65,33 @@
       }
     });
 
-    ReactDOM.render(
-      <div>
-        <Comment>Hey Now</Comment>
-        <Comment>Blah Boo</Comment>
-        <Comment>Nuk Nuk</Comment>
-      </div>
-    , document.getElementById('container') );
+    var Board = React.createClass({
+
+      getInitialState: function () {
+        return {
+          comments: [
+            'I like bacon',
+            'Want to get ice cream?',
+            'Enough with the comments'
+          ]
+        }
+      },
+
+      render: function () {
+        return (
+            <div className="board">
+              {
+                this.state.comments.map(function (text, i) {
+                  return (<Comment key={i}>{text}</Comment>);
+                })
+              }
+            </div>
+          );
+        }
+
+    });
+
+    ReactDOM.render(<Board />, document.getElementById('container') );
   </script>
 
 </body>
