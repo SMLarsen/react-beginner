@@ -28,10 +28,12 @@
       },
 
       remove: function () {
-          console.log("Removing comment");
+          this.props.removeFromBoard(this.props.index);
       },
 
       save: function () {
+        console.log('this.refs:', this.refs);
+        this.props.updateCommentText(this.refs.newText.value, this.props.index);
           var val = this.refs.newText.value;
           console.log('New comments val:', val);
           this.setState({ editing: false});
@@ -93,7 +95,7 @@
 
       eachComment: function (text, i) {
         return (
-          <Comment key={i} index={i}>
+          <Comment key={i} index={i} updateCommentText={this.updateComment} removeFromBoard={this.removeComment}>
             {text}
           </Comment>);
       },
