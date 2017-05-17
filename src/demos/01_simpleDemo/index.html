@@ -34,8 +34,6 @@
       save: function () {
         console.log('this.refs:', this.refs);
         this.props.updateCommentText(this.refs.newText.value, this.props.index);
-          var val = this.refs.newText.value;
-          console.log('New comments val:', val);
           this.setState({ editing: false});
       },
 
@@ -71,12 +69,14 @@
 
       getInitialState: function () {
         return {
-          comments: [
-            'I like bacon',
-            'Want to get ice cream?',
-            'Enough with the comments'
-          ]
+          comments: []
         }
+      },
+
+      add: function (text) {
+        var arr = this.state.comments;
+        arr.push(text);
+        this.setState({comments: arr});
       },
 
       removeComment: function (i) {
@@ -102,9 +102,12 @@
 
       render: function () {
         return (
+          <div>
+            <button onClick={this.add.bind(null, 'Default Text')} className="button-info create">Add New</button>
             <div className="board">
               {this.state.comments.map(this.eachComment)}
             </div>
+          </div>
         );
       }
 
